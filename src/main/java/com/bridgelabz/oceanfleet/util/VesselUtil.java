@@ -26,6 +26,28 @@ public class VesselUtil {
         return null;
     }
 
+    public List<Vessel> getHighPerformanceVessels() {
+        List<Vessel> highPerformanceVessels = new ArrayList<>();
+
+        if (vesselList.isEmpty()) {
+            return highPerformanceVessels;
+        }
+
+        double highestSpeed = Double.NEGATIVE_INFINITY;
+
+        for (Vessel vessel : vesselList) {
+            if (vessel.getAverageSpeed() > highestSpeed) {
+                highestSpeed = vessel.getAverageSpeed();
+                highPerformanceVessels.clear();
+                highPerformanceVessels.add(vessel);
+            } else if (vessel.getAverageSpeed() == highestSpeed) {
+                highPerformanceVessels.add(vessel);
+            }
+        }
+
+        return highPerformanceVessels;
+    }
+
     public List<Vessel> getVesselList() {
         return vesselList;
     }
