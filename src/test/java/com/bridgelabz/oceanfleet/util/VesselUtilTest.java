@@ -29,4 +29,36 @@ class VesselUtilTest {
         assertNotNull(vesselUtil.getVesselList());
         assertTrue(vesselUtil.getVesselList().isEmpty());
     }
+
+    @Test
+    void testGetVesselById() {
+        VesselUtil vesselUtil = new VesselUtil();
+
+        Vessel vessel = new Vessel("V001", "Sea King", 25.5, "Cargo");
+        vesselUtil.addVesselPerformance(vessel);
+
+        assertEquals(vessel, vesselUtil.getVesselById("V001"));
+    }
+
+    @Test
+    void testGetVesselByIdNotFound() {
+        VesselUtil vesselUtil = new VesselUtil();
+
+        vesselUtil.addVesselPerformance(
+                new Vessel("V001", "Sea King", 25.5, "Cargo")
+        );
+
+        assertNull(vesselUtil.getVesselById("V999"));
+    }
+
+    @Test
+    void testGetVesselByIdIsCaseSensitive() {
+        VesselUtil vesselUtil = new VesselUtil();
+
+        vesselUtil.addVesselPerformance(
+                new Vessel("V001", "Sea King", 25.5, "Cargo")
+        );
+
+        assertNull(vesselUtil.getVesselById("v001"));
+    }
 }
