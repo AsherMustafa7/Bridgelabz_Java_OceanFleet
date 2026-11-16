@@ -3,18 +3,21 @@ package com.bridgelabz.oceanfleet.util;
 import com.bridgelabz.oceanfleet.model.Vessel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class VesselUtil {
 
-    private List<Vessel> vesselList;
+    private final List<Vessel> vesselList;
 
     public VesselUtil() {
         this.vesselList = new ArrayList<>();
     }
 
     public void addVesselPerformance(Vessel vessel) {
-        vesselList.add(vessel);
+        if (vessel != null) {
+            vesselList.add(vessel);
+        }
     }
 
     public Vessel getVesselById(String vesselId) {
@@ -49,10 +52,6 @@ public class VesselUtil {
     }
 
     public List<Vessel> getVesselList() {
-        return vesselList;
-    }
-
-    public void setVesselList(List<Vessel> vesselList) {
-        this.vesselList = vesselList;
+        return Collections.unmodifiableList(vesselList);
     }
 }

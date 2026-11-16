@@ -111,4 +111,26 @@ class VesselUtilTest {
 
         assertTrue(vesselUtil.getHighPerformanceVessels().isEmpty());
     }
+    @Test
+void testAddingNullVessel() {
+    VesselUtil vesselUtil = new VesselUtil();
+
+    vesselUtil.addVesselPerformance(null);
+
+    assertTrue(vesselUtil.getVesselList().isEmpty());
+}
+
+@Test
+void testVesselListCannotBeModifiedDirectly() {
+    VesselUtil vesselUtil = new VesselUtil();
+
+    vesselUtil.addVesselPerformance(
+            new Vessel("V001", "Sea King", 25.5, "Cargo")
+    );
+
+    assertThrows(
+            UnsupportedOperationException.class,
+            () -> vesselUtil.getVesselList().clear()
+    );
+}
 }
